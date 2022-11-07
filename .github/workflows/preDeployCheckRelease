@@ -1,0 +1,36 @@
+name: Validate UAT Deployment
+
+# Controls when the action will run. 
+on:
+  pull_request:
+    branches: release
+    paths-ignore:
+      - ".github/workflows/*"
+
+jobs:
+  validateDeployUAT:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install Salesforce CLI
+        run: |
+          npm install sfdx-cli -g
+          pip install xq
+          pip install yq
+      - name: Install sfdxGit delta
+        run: |
+          echo y | sfdx plugins:install sfdx-git-delta
+          sfdx sgd:source:delta --to "HEAD" --from "HEAD^"  --ignore ignorefile --output "."
+          cat package/package.xml
+          chmod 777 generateTestClass.sh
+          ./generateTestClass.sh
+      - uses: sfdx-actions/setup-sfdx@v1
+        with:
+          sfdx-auth-url: ${{ secrets.SF_DESTINATION_PROD_TOKEN }}
+      - name: 'Running checks'
+        run: |
+          echo "Test Classess to be run"
+          cat TestClassess
+          sfdx force:source:deploy -x package/package.xml   --checkonly  -l RunSpecifiedTests  -r `cat TestClassess` -u ${{ secrets.SF_DESTINATION_PROD_USERNAME }} -w30
