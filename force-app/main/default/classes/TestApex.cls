@@ -3,5 +3,6 @@ public with sharing class TestApex {
         List<Account> accList = [SELECT Id, Name FROM Account LIMIT 10000];
         System.debug('accList-->>'+accList);
         System.debug('accList-->>'+accList[0].Name);
+        System.debug('accList-->>'+accList[0].Id);
     }
 }
