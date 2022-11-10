@@ -1,0 +1,3 @@
+ignorefile
+.github/workflows/*.yml
+force-app/main/default/lwc/jsconfig.json
