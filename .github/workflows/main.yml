@@ -31,4 +31,4 @@ jobs:
         run: |
           echo "Test Classess to be run"
           cat TestClassess
-          sfdx force:source:deploy -x package/package.xml   --checkonly  -l RunSpecifiedTests  -r `cat TestClassess` -u ${{ secrets.SF_DESTINATION_PROD_USERNAME }} -w30
+          sfdx force:source:deploy -x package/package.xml   --checkonly  -u ${{ secrets.SF_DESTINATION_PROD_USERNAME }} -w30
