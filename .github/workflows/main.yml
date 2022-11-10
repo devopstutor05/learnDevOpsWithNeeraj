@@ -24,8 +24,6 @@ jobs:
           echo y | sfdx plugins:install sfdx-git-delta
           sfdx sgd:source:delta --to "HEAD" --from "HEAD^"  --ignore ignorefile --output "."
           cat package/package.xml
-          chmod 777 generateTestClass.sh
-          ./generateTestClass.sh
       - uses: sfdx-actions/setup-sfdx@v1
         with:
           sfdx-auth-url: ${{ secrets.SF_DESTINATION_PROD_TOKEN }}
