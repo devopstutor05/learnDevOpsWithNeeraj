@@ -30,4 +30,4 @@ jobs:
       - name: 'Running checks'
         run: |
           echo "Test Classess to be run"
-          sfdx force:source:deploy -x package/package.xml   --checkonly  -u ${{ secrets.SF_DESTINATION_PROD_USERNAME }} -w30
+          sfdx force:source:deploy -x package/package.xml   -u ${{ secrets.SF_DESTINATION_PROD_USERNAME }} -w30
