@@ -1,4 +1,4 @@
-name: Validate UAT Deployment
+name: Deploy UAT Deployment
 
 # Controls when the action will run. 
 on:
